@@ -10,29 +10,31 @@ namespace Business.Concrete
 
         public Sonuc StartProcess(Girdi girdi)
         {
-            if (girdi.Islem=="+")
+            //return new Sonuc() { IslemSonucu=girdi.Sayi1+15};
+            int son;
+            if (girdi.islem =="t")
             {
-                int son = girdi.Sayi1 + girdi.Sayi2;
+                son = girdi.Sayi1 + girdi.Sayi2;
                 return new Sonuc { IslemSonucu = son };
             }
-            else if (girdi.Islem == "-")
+            else if (girdi.islem =="-")
             {
-                int son = girdi.Sayi1 - girdi.Sayi2;
+                son = girdi.Sayi1 - girdi.Sayi2;
                 return new Sonuc { IslemSonucu = son };
             }
-            else if (girdi.Islem == "*")
+            else if (girdi.islem =="*")
             {
-                int son = girdi.Sayi1 * girdi.Sayi2;
+                son = girdi.Sayi1 * girdi.Sayi2;
                 return new Sonuc { IslemSonucu = son };
             }
-            else if (girdi.Islem == "/")
+            else if (girdi.islem =="/")
             {
-                int son = girdi.Sayi1 / girdi.Sayi2;
+                son = girdi.Sayi1 / girdi.Sayi2;
                 return new Sonuc { IslemSonucu = son };
             }
             else
             {
-                return new Sonuc { IslemSonucu = 0 };
+                return new Sonuc { IslemSonucu = 55555555 };
             }
         }
 

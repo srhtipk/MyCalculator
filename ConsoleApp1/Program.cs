@@ -9,7 +9,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             ProcessManager processManager = new ProcessManager();
-            Girdi girdi = new Girdi() { Sayi1 = 15, Sayi2 = 10, Islem = "*" };
+            Girdi girdi = new Girdi() { Sayi1 = 155, Sayi2 = 5, islem = "top" };
             var result=processManager.StartProcess(girdi);
             Console.WriteLine(result.IslemSonucu);
         }

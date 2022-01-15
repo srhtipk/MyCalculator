@@ -9,6 +9,6 @@ namespace Entities.Concrete
     {
         public int Sayi1 { get; set; }
         public int Sayi2 { get; set; }
-        public string Islem { get; set; }
+        public string islem { get; set; }
     }
 }
