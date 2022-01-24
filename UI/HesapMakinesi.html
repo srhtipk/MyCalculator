@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Hesap Makinesi</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="HesapMakinesi.css" /> -->
+    <!-- <script type="text/javascript" src="HesapMakinesi.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+	.myBtn {
+    width:5vw;
+    height:3vw;
+    font-size:1.6vw;
+}
+	</style>
+    <script>
+        $(document).ready(function () {
+            $("#asd").click(function () {
+                $("#test").hide();
+            });
+        })
+		
+		function ekle(sayi) {
+    document.getElementById("inp").value += sayi;
+}
+
+function temizle() {
+    document.getElementById("inp").value = "";
+}
+
+function getIslem(islem) {
+    ekle(islem);
+    let temp = document.getElementById("inp").value;
+    this.firstLength = temp.length - 1;
+    let firstString = temp.substr(0, firstLength);
+    //console.log(first);
+    this.isl = temp.substr(firstLength, firstLength + 1);
+    console.log(isl);
+    this.firstNum = parseInt(firstString);
+    console.log(firstNum);
+}
+
+function lastProcess() {
+    let temp = document.getElementById("inp").value;
+    this.secondLength = temp.length - firstLength - 1;
+    let secondString = temp.substr(temp.length - secondLength, temp.length);
+    //console.log(second);
+    this.secondNum = parseInt(secondString);
+    console.log(secondNum);
+	
+	varData={
+	Sayi1:this.firstNum,
+	Sayi2:this.secondNum,
+	Islem:this.isl
+	}
+	
+	<!-- var Data = { -->
+		<!-- "Sayi1":"jonsa", -->
+		<!-- "e-Sayi2":"qwerty@gmail.com", -->
+		<!-- "Islem":1223456789 -->
+	<!-- }; -->
+
+$.ajax({
+                type: "get",
+                url: "https://localhost:44349/api/process",
+				dataType: "json",
+				//contentType: "application/json; charset=utf-8",
+				data: {
+					"Sayi1": this.firstNum,
+					"Sayi2": this.secondNum,
+					"islem": this.isl
+},
+				//data: JSON.stringify(varData),
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+					//alert("Başarılı");
+                    alert("Sonuç=" + response.islemSonucu);
+					//this.sonuc = response.islemSonucu;
+					ekle("="+response.islemSonucu);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+
+    //let sonuc = firstNum + secondNum;
+    //let x = document.getElementById("inp").value += "=" + sonuc;
+}
+
+//https://localhost:44349/api/process?Sayi1=4&Sayi2=3&Islem=*
+
+var firstNum;
+var firstLength;
+var secondNum;
+var secondLength;
+var isl;
+var sonuc;
+
+
+    </script>
+</head>
+<body>
+    
+
+    <div class="container">
+        <div class="col-md-5 mx-auto mt-5 text-center">
+            <div class="card d-block shadow-lg">
+                <div class="card-header">
+                    <h2>My Calculator</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+
+
+                        <div class="ml-2 mx-auto">
+                            <p id="test">This is another paragraph.</p>
+
+                            <div>
+                                <input class="form-control form-control-lg" id="inp" type="text" name="name" value="" />
+                            </div>
+
+                            <div class="mt-2">
+                                <button onclick="ekle(1)" type="button" class="btn btn-primary myBtn">1</button>
+                                <button onclick="ekle(2)" type="button" class="btn btn-primary myBtn">2</button>
+                                <button onclick="ekle(3)" type="button" class="btn btn-primary myBtn">3</button>
+                                <button onclick='getIslem("t")' type="button" class="btn btn-primary myBtn">+</button>
+                            </div>
+
+                            <div class="mt-2">
+                                <button onclick="ekle(4)" type="button" class="btn btn-primary myBtn">4</button>
+                                <button onclick="ekle(5)" type="button" class="btn btn-primary myBtn">5</button>
+                                <button onclick="ekle(6)" type="button" class="btn btn-primary myBtn">6</button>
+                                <button onclick='getIslem("-")' type="button" class="btn btn-primary myBtn">-</button>
+                            </div>
+
+                            <div class="mt-2">
+                                <button onclick="ekle(7)" type="button" class="btn btn-primary myBtn">7</button>
+                                <button onclick="ekle(8)" type="button" class="btn btn-primary myBtn">8</button>
+                                <button onclick="ekle(9)" type="button" class="btn btn-primary myBtn">9</button>
+                                <button onclick='getIslem("*")' type="button" class="btn btn-primary myBtn">*</button>
+                            </div>
+
+                            <div class="mt-2">
+                                <button onclick="temizle()" type="button" class="btn btn-primary myBtn">C</button>
+                                <button onclick="ekle(0)" type="button" class="btn btn-primary myBtn">0</button>
+                                <button id="asd" onclick="lastProcess()" type="button" class="btn btn-primary myBtn">=</button>
+                                <button onclick='getIslem("/")' type="button" class="btn btn-primary myBtn">/</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="card-footer">
+                    Enjoy it!
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
